@@ -17,16 +17,24 @@ public class Animal extends AbstractAnimal {
         super(name, (Math.random()>0.5)? SEX.FEMALE : SEX.MALE, size);
     }
 
-    public Animal layEgg() {
-        Animal newChild = new Animal(
-                this.getName() + " Jr.",
-                (Math.random()>0.5)? SEX.FEMALE : SEX.MALE,
-                (int) (this.getSize()*0.1)
-        );
-        newChild.setWeight((int) (this.getWeight()*0.1));
-        newChild.setHunger((byte)8);
-        newChild.setHealth((byte)8);
+    public Egg layEgg() {
+        if (this.getSex() == this.getBirthGiver())
+        {
+            Animal newChild = new Animal(
+                    this.getName() + " Jr.",
+                    (Math.random()>0.5)? SEX.FEMALE : SEX.MALE,
+                    (int) (this.getSize()*0.1)
+            );
+            newChild.setWeight((int) (this.getWeight()*0.1));
+            newChild.setHunger((byte)8);
+            newChild.setHealth((byte)8);
 
-        return newChild;
+            Egg newEgg  = new Egg(newChild);
+            return newEgg;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
