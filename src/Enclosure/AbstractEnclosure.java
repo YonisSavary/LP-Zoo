@@ -1,8 +1,6 @@
 package Enclosure;
 
 import Animal.AbstractAnimal;
-
-import java.sql.DataTruncation;
 import java.util.ArrayList;
 
 public abstract class AbstractEnclosure <AnimalType extends AbstractAnimal> {

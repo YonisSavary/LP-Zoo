@@ -16,29 +16,29 @@ public class Zoo {
     private int timeSpeed = 1; // How many months passes each turns ?
     private int turnDuration = 4 ; // How many action the employee can before the end of turn
 
-    public Zoo(String name){
+    public Zoo(String name, Employee employee){
         this.name = name;
-        this.enclosures.add(new Aquarium<Shark>("Aquarium", 30, 6));
-        this.enclosures.add(new Enclosure<Bear>("Enclos Classique", 30, 6))  ;
-        this.enclosures.add(new Aviary<Eagle>("Volière", 30, 6)  );
-        for(int i=0; i<5; i++)
-        {
-            this.enclosures.get(0).addResident(new Shark());
-            this.enclosures.get(0).getResident(i).setName(Names.names[(int)Math.floor(Math.random()*15)]);
+        this.employee = employee;
+    }
 
-            this.enclosures.get(1).addResident(new Bear());
-            this.enclosures.get(1).getResident(i).setName(Names.names[(int)Math.floor(Math.random()*15)]);
-
-            this.enclosures.get(2).addResident(new Eagle());
-            this.enclosures.get(2).getResident(i).setName(Names.names[(int)Math.floor(Math.random()*15)]);
+    public AbstractEnclosure getEnclosure(int id) throws Exception {
+        try {
+            return this.enclosures.get(id);
+        } catch (Exception e) {
+            throw new Exception("Bad id");
         }
+    }
 
+    public void addEnclosure(AbstractEnclosure enc){
+        this.enclosures.add(enc);
+    }
 
-        this.enclosures.add(new Aquarium<Shark>("Aquarium (Temporaire)", 30, 6)  );
-        this.enclosures.add(new Enclosure<Bear>("Enclos Classique (Temporaire)", 30, 6)  );
-        this.enclosures.add(new Aviary<Eagle>("Volière (Temporaire)", 30, 6)  );
-
-        this.employee = new Employee(this.name + " Employee", (Math.random()>0.5)? AbstractAnimal.SEX.FEMALE : AbstractAnimal.SEX.MALE, 20);
+    public void removeEnclosure(int id) throws Exception {
+        try {
+            this.enclosures.remove(id);
+        } catch (Exception e){
+            throw new Exception("Bad Id");
+        }
     }
 
     public int getResidentNumber(){
@@ -59,11 +59,11 @@ public class Zoo {
 
             this.employee.startMenu(this.enclosures, turnDuration);
 
-            for(int i=0; i<this.enclosures.size(); i++){
-                this.enclosures.get(i).begin();
-                while(this.enclosures.get(i).hasNext()){
+            for (AbstractEnclosure enclosure : this.enclosures) {
+                enclosure.begin();
+                while (enclosure.hasNext()) {
                     //System.out.println("Month passes for " + this.enclosures.get(i).getResident().getName());
-                    this.enclosures.get(i).getResident().monthsPasses(this.timeSpeed);
+                    enclosure.getResident().monthsPasses(this.timeSpeed);
                 }
             }
 
