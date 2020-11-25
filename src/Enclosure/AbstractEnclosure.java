@@ -10,6 +10,8 @@ public abstract class AbstractEnclosure <AnimalType extends AbstractAnimal> {
     int maximalPopulation = 10;
     int population = 0;
     int cursor = 0;
+    boolean special = false;
+    boolean transfert = true;
     String type="Classical";
     public CLEANLINESS cleanliness = CLEANLINESS.NORMAL;
     ArrayList<AnimalType> residents = new ArrayList<AnimalType>();
@@ -20,6 +22,7 @@ public abstract class AbstractEnclosure <AnimalType extends AbstractAnimal> {
         this.setMaximalPopulation(maximalPopulation);
     }
 
+    public void monthsPasses(float monthsNumber) {}
     // Getters
     public String getName()                                 { return this.name; }
     public int getSurface()                                 { return this.surface; }
@@ -27,13 +30,17 @@ public abstract class AbstractEnclosure <AnimalType extends AbstractAnimal> {
     public int getPopulation()                              { return this.population; }
     public CLEANLINESS getCleanliness()                     { return this.cleanliness; }
     public String getType()                                 { return this.type; }
+    public boolean isSpecial()                              { return this.special; }
+    public boolean canTransfert()                           { return this.transfert; }
     // Setters
     public void setType(String type)                        { this.type = type; }
     public void setName(String name)                        { this.name = name; }
     public void setSurface(int surface)                     { this.surface = surface; }
     public void setMaximalPopulation(int maximalPopulation) { this.maximalPopulation = maximalPopulation; }
     //public void setPopulation(int population)             { this.population = population; }
-    protected void setCleanliness(CLEANLINESS cleanliness)     { this.cleanliness = cleanliness; }
+    protected void setCleanliness(CLEANLINESS cleanliness)  { this.cleanliness = cleanliness; }
+    protected void setSpecial(boolean newVal)               { this.special = newVal; }
+    protected void setTransfert(boolean trans)              { this.transfert = trans; }
 
     public int getCursor(){
         return this.cursor;
