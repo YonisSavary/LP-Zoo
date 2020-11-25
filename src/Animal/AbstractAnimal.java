@@ -45,6 +45,9 @@ public abstract class AbstractAnimal {
     protected byte hunger = 8; // FEED BY DEFAULT
     private boolean sleeping = false;
 
+    // Used for graphical
+    protected String color = "#C5FF00";
+
     public AbstractAnimal(){}
 
     /**
@@ -93,6 +96,8 @@ public abstract class AbstractAnimal {
     public byte     getRawHunger()                  { return hunger; }
     public boolean  isDependant()                   { return dependant;}
 
+    public void     setColor(String newC)           { this.color = newC; }
+    public String   getColor()                      { return color; }
 
     /**
      * @param action action description

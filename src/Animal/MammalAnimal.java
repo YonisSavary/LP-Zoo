@@ -27,15 +27,22 @@ public class MammalAnimal extends AbstractAnimal{
      * @throws CloneNotSupportedException throwed if java can't clone this animal into a new object
      */
     public MammalAnimal giveBirth() {
-        MammalAnimal newChild = new MammalAnimal(
-                this.getName() + " Jr.",
-                (Math.random()>0.5)? SEX.FEMALE : SEX.MALE,
-                (int) (this.getSize()*0.1)
-        );
-        newChild.setWeight((int) (this.getWeight()*0.1));
-        newChild.setHunger((byte)8);
-        newChild.setHealth((byte)8);
+        if (this.getSex() == this.getBirthGiver())
+        {
+            MammalAnimal newChild = new MammalAnimal(
+                    this.getName() + " Jr.",
+                    (Math.random()>0.5)? SEX.FEMALE : SEX.MALE,
+                    (int) (this.getSize()*0.1)
+            );
+            newChild.setWeight((int) (this.getWeight()*0.1));
+            newChild.setHunger((byte)8);
+            newChild.setHealth((byte)8);
 
-        return newChild;
-    };
+            return newChild;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
