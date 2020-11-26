@@ -30,20 +30,21 @@ public abstract class AbstractAnimal {
     public static String[] HUNGER = {"STARVING", "HUNGRY", "FEED" ,"FILLED"};
     public static String[] HEALTH = {"DEAD", "DISEASED", "OKAY", "HEALTHY"};
     // Props
-    private String  name = "Animal";
-    private SEX     sex = SEX.MALE;
-    private SEX     birthGiver = SEX.FEMALE;
-    private int     weight = 0;             // Weight in Kg
-    private int     size = 0;               // Height or Width in Cm
-    private float     age = 1;
-    protected String sound = "roar";
+    private String      name = "Animal";
+    private SEX         sex = SEX.MALE;
+    private SEX         birthGiver = SEX.FEMALE;
+    private int         weight = 0;             // Weight in Kg
+    private int         size = 0;               // Height or Width in Cm
+    private float       age = 1;
+    protected String    sound = "roar";
 
     // An animal is independent if it can feed itself and maintain itself in good health
     protected boolean dependant = true;
     // Health Situation
-    protected byte health = 8; // OKAY BY DEFAULT
-    protected byte hunger = 8; // FEED BY DEFAULT
-    private boolean sleeping = false;
+    protected byte      health = 8; // OKAY BY DEFAULT
+    protected byte      hunger = 8; // FEED BY DEFAULT
+    protected boolean   sleeping = false;
+    protected boolean   dead = false;
 
     // Used for graphical
     protected String color = "#C5FF00";
@@ -65,12 +66,12 @@ public abstract class AbstractAnimal {
         this.setSleeping(false);
     }
 
-    public void emit()  { this.doAction("do a " + this.sound); }
+    public void emit()  { if (!this.dead) this.doAction("do a " + this.sound); }
 
-    public void heal()  { this.setHealth((byte)12);}
+    public void heal()  { if (!this.dead) this.setHealth((byte)12);}
 
     public void sleep() { setSleeping(true); }
-    public void wake()  { setSleeping(false); }
+    public void wake()  { if (!this.dead) setSleeping(false); }
 
     // Basic setters
     public void     setName(String name)            { this.name = name; }
@@ -82,6 +83,8 @@ public abstract class AbstractAnimal {
     protected void  setHealth(byte health)          { this.health = health;}
     public void     setAge(float age)               { this.age = age; }
     public void     setBirthGiver(SEX birthGiver)   { this.birthGiver = birthGiver; }
+    public void     setSound(String newSound)       { this.sound = newSound;}
+    public void     die()                           { this.dead = true; this.health = 0; }
     // Basic getters
     public String   getName()                       { return name; }
     public SEX      getSex()                        { return sex; }
@@ -95,6 +98,7 @@ public abstract class AbstractAnimal {
     public String   getHunger()                     { return HUNGER[hunger/4];}
     public byte     getRawHunger()                  { return hunger; }
     public boolean  isDependant()                   { return dependant;}
+    public boolean  isDead()                        { return dead;}
 
     public void     setColor(String newC)           { this.color = newC; }
     public String   getColor()                      { return color; }
@@ -105,6 +109,7 @@ public abstract class AbstractAnimal {
      */
     public String doAction (String action)
     {
+        if (!this.dead) return this.getName() +" is still dead. Bro momento";
         return " * " + this.getName() + ": " + action + " * ";
     }
 
@@ -114,7 +119,7 @@ public abstract class AbstractAnimal {
 
     public void monthsPasses(float monthsNumber){
         this.setAge( age + (monthsNumber/12) );
-        if(!this.isDependant())
+        if(this.isDependant())
         {
             //Randomly subtract 1 to 4 to both hunger and health status
             this.setHealth((byte) (health-((int) Math.floor(Math.random()*2*monthsNumber)))  );

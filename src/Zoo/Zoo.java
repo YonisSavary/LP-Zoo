@@ -60,16 +60,20 @@ public class Zoo {
             this.employee.startMenu(this.enclosures, turnDuration);
 
             for (AbstractEnclosure enclosure : this.enclosures) {
-                enclosure.begin();
-                while (enclosure.hasNext()) {
-                    //System.out.println("Month passes for " + this.enclosures.get(i).getResident().getName());
-                    enclosure.getResident().monthsPasses(this.timeSpeed);
+                if (enclosure.isSpecial()){
+                    enclosure.monthsPasses(this.timeSpeed);
+                } else {
+                    enclosure.begin();
+                    while (enclosure.hasNext()) {
+                        //System.out.println("Month passes for " + this.enclosures.get(i).getResident().getName());
+                        enclosure.getResident().monthsPasses(this.timeSpeed);
+                    }
                 }
             }
 
             this.monthCount += this.timeSpeed;
         }
-
+        System.out.println("0 Résident dans " + name + " : fin du jeux !");
     }
 
 }
