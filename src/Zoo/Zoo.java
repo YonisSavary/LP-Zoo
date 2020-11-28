@@ -15,6 +15,11 @@ public class Zoo {
     private int monthCount = 1 ;
     private int timeSpeed = 1; // How many months passes each turns ?
     private int turnDuration = 4 ; // How many action the employee can before the end of turn
+    public int money=0;
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
 
     public Zoo(String name, Employee employee){
         this.name = name;

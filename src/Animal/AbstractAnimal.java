@@ -144,7 +144,7 @@ public abstract class AbstractAnimal {
     {
         int powerFrontier = this.power - enemy.power;
         if ((!this.dead & !enemy.dead)&& (this.getEnclos() == enemy.getEnclos())){
-            for (int i = -10; i > 11; i++){
+            for (double i=-10; i >= 11; i++){
                 if(powerFrontier == i){
                     this.setHealth((byte) (health + powerFrontier));
                     enemy.setHealth((byte) (health - powerFrontier));
