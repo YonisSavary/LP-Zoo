@@ -1,5 +1,7 @@
 package Animal;
 
+import Enclosure.Aviary;
+
 public class Animal extends AbstractAnimal {
     public Animal(Animal origin)
     {

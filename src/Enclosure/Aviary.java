@@ -12,6 +12,6 @@ public class Aviary<AnimalType extends AbstractAnimal & Flying> extends Abstract
 
     public Aviary(String name, int surface, int maximalPopulation) {
         super(name, surface, maximalPopulation);
-        this.setType("Aviary");
+        this.setType(ENCLOSURE_TYPE.AVIARY);
     }
 }

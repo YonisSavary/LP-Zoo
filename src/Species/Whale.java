@@ -7,6 +7,7 @@ public class Whale extends MammalAnimal implements Marin {
     public Whale(MammalAnimal origin) {
         super(origin);
         this.sound = "WOOOOOOOOOOOOOOOOOO";
+        this.power = 5;
     }
     public Whale() { super("Whale", SEX.MALE, 5000); }
 

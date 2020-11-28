@@ -7,6 +7,7 @@ public class ClownFish extends Animal implements Marin {
     public ClownFish(Animal origin) {
         super(origin);
         this.sound = "gloup gloup";
+        this.power = 1;
     }
     public ClownFish() {
         super("ClownFish", SEX.MALE, 5);

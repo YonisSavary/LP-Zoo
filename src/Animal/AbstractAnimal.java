@@ -1,5 +1,12 @@
 package Animal;
 
+import Enclosure.Enclosure;
+import Enclosure.AbstractEnclosure;
+import Enclosure.AbstractEnclosure.ENCLOSURE_TYPE;
+
+import Species.Penguin;
+
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -37,7 +44,8 @@ public abstract class AbstractAnimal {
     private int         size = 0;               // Height or Width in Cm
     private float       age = 1;
     protected String    sound = "roar";
-
+    public int          power = 0;
+    public AbstractEnclosure.ENCLOSURE_TYPE enclos;
     // An animal is independent if it can feed itself and maintain itself in good health
     protected boolean dependant = true;
     // Health Situation
@@ -74,34 +82,36 @@ public abstract class AbstractAnimal {
     public void wake()  { if (!this.dead) setSleeping(false); }
 
     // Basic setters
-    public void     setName(String name)            { this.name = name; }
-    protected void  setSex(SEX sex)                 { this.sex = sex; }
-    protected void  setWeight(int weight)           { this.weight = weight; }
-    protected void  setSize(int size)               { this.size = size; }
-    protected void  setSleeping(boolean sleeping)   { this.sleeping = sleeping;}
-    protected void  setHunger(byte hunger)          { this.health = hunger;}
-    protected void  setHealth(byte health)          { this.health = health;}
-    public void     setAge(float age)               { this.age = age; }
-    public void     setBirthGiver(SEX birthGiver)   { this.birthGiver = birthGiver; }
-    public void     setSound(String newSound)       { this.sound = newSound;}
-    public void     die()                           { this.dead = true; this.health = 0; }
+    public void     setName(String name)                                                 { this.name = name; }
+    protected void  setSex(SEX sex)                                                      { this.sex = sex; }
+    protected void  setWeight(int weight)                                                { this.weight = weight; }
+    protected void  setSize(int size)                                                    { this.size = size; }
+    protected void  setSleeping(boolean sleeping)                                        { this.sleeping = sleeping;}
+    protected void  setHunger(byte hunger)                                               { this.health = hunger;}
+    protected void  setHealth(byte health)                                               { this.health = health;}
+    protected void  setEnclosure(ENCLOSURE_TYPE enclos)      { this.enclos = enclos;}
+    public void     setAge(float age)                                                    { this.age = age; }
+    public void     setBirthGiver(SEX birthGiver)                                        { this.birthGiver = birthGiver; }
+    public void     setSound(String newSound)                                            { this.sound = newSound;}
+    public void     die()                                                                { this.dead = true; this.health = 0; }
     // Basic getters
-    public String   getName()                       { return name; }
-    public SEX      getSex()                        { return sex; }
-    public int      getWeight()                     { return weight; }
-    public int      getSize()                       { return size; }
-    public boolean  isSleeping()                    { return sleeping;}
-    public float    getAge()                        { return age; }
-    public SEX      getBirthGiver()                 { return birthGiver; }
-    public String   getHealth()                     { return HEALTH[health/4];}
-    public byte     getRawHealth()                  { return health; }
-    public String   getHunger()                     { return HUNGER[hunger/4];}
-    public byte     getRawHunger()                  { return hunger; }
-    public boolean  isDependant()                   { return dependant;}
-    public boolean  isDead()                        { return dead;}
-
-    public void     setColor(String newC)           { this.color = newC; }
-    public String   getColor()                      { return color; }
+    public String   getName()                                                            { return name; }
+    public SEX      getSex()                                                             { return sex; }
+    public int      getWeight()                                                          { return weight; }
+    public int      getSize()                                                            { return size; }
+    public boolean  isSleeping()                                                         { return sleeping;}
+    public float    getAge()                                                             { return age; }
+    public SEX      getBirthGiver()                                                      { return birthGiver; }
+    public String   getHealth()                                                          { return HEALTH[health/4];}
+    public byte     getRawHealth()                                                       { return health; }
+    public String   getHunger()                                                          { return HUNGER[hunger/4];}
+    public byte     getRawHunger()                                                       { return hunger; }
+    public boolean  isDependant()                                                        { return dependant;}
+    public boolean  isDead()                                                             { return dead;}
+    public int      getPower()                                                           { return power;}
+    public AbstractEnclosure.ENCLOSURE_TYPE getEnclos()                                  { return enclos; }
+    public void     setColor(String newC)                                                { this.color = newC; }
+    public String   getColor()                                                           { return color; }
 
     /**
      * @param action action description
@@ -124,6 +134,23 @@ public abstract class AbstractAnimal {
             //Randomly subtract 1 to 4 to both hunger and health status
             this.setHealth((byte) (health-((int) Math.floor(Math.random()*2*monthsNumber)))  );
             this.setHunger((byte) (hunger-((int) Math.floor(Math.random()*2*monthsNumber)))  );
+        }
+    }
+    public void EnclosureAttribution(ENCLOSURE_TYPE type){
+        this.setEnclosure(type);
+    }
+
+    public void fight(Animal enemy)
+    {
+        int powerFrontier = this.power - enemy.power;
+        if ((!this.dead & !enemy.dead)&& (this.getEnclos() == enemy.getEnclos())){
+            for (int i = -10; i > 11; i++){
+                if(powerFrontier == i){
+                    this.setHealth((byte) (health + powerFrontier));
+                    enemy.setHealth((byte) (health - powerFrontier));
+                }
+            }
+
         }
     }
 

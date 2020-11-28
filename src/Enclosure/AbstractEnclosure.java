@@ -4,6 +4,7 @@ import Animal.AbstractAnimal;
 import java.util.ArrayList;
 
 public abstract class AbstractEnclosure <AnimalType extends AbstractAnimal> {
+    public enum ENCLOSURE_TYPE {AVIARY, NORMAL, AQUARIUM};
     public static enum CLEANLINESS {CLEAN, NORMAL, MESSY};
     String name;
     int surface = 10; // Surface in meter square
@@ -29,11 +30,11 @@ public abstract class AbstractEnclosure <AnimalType extends AbstractAnimal> {
     public int getMaximalPopulation()                       { return this.maximalPopulation; }
     public int getPopulation()                              { return this.population; }
     public CLEANLINESS getCleanliness()                     { return this.cleanliness; }
-    public String getType()                                 { return this.type; }
+    public ENCLOSURE_TYPE getType()                         { return ENCLOSURE_TYPE.valueOf(this.type);}
     public boolean isSpecial()                              { return this.special; }
     public boolean canTransfert()                           { return this.transfert; }
     // Setters
-    public void setType(String type)                        { this.type = type; }
+    public void setType(ENCLOSURE_TYPE type)                { this.type = String.valueOf(type); }
     public void setName(String name)                        { this.name = name; }
     public void setSurface(int surface)                     { this.surface = surface; }
     public void setMaximalPopulation(int maximalPopulation) { this.maximalPopulation = maximalPopulation; }

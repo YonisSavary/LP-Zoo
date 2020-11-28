@@ -94,6 +94,7 @@ public class Wolf extends MammalAnimal implements Wanderer{
     public Wolf(MammalAnimal origin) {
         super(origin);
         this.sound = "Ahwoo";
+        this.power = 6;
     }
     public Wolf() { super("Wolf", (Math.random() > 0.5)? SEX.FEMALE: SEX.MALE, 150); }
 

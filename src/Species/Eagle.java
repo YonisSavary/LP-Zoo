@@ -7,6 +7,7 @@ public class Eagle extends Animal implements Flying {
     public Eagle(Animal origin) {
         super(origin);
         this.sound = "REEE";
+        this.power = 4;
     }
     public Eagle() { super("Eagle", SEX.MALE, 100); }
 

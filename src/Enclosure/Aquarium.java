@@ -9,6 +9,6 @@ public class Aquarium<AnimalType extends AbstractAnimal & Marin> extends Abstrac
 
     public Aquarium(String name, int surface, int maximalPopulation) {
         super(name, surface, maximalPopulation);
-        this.setType("Aquarium");
+        this.setType(ENCLOSURE_TYPE.AQUARIUM);
     }
 }

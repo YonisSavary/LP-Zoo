@@ -7,6 +7,7 @@ public class Shark extends Animal implements Marin {
     public Shark(Animal origin) {
         super(origin);
         this.sound = "Ahah yes.";
+        this.power = 10;
     }
     public Shark() { super("Shark", SEX.MALE, 200); }
 

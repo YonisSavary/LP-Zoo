@@ -8,6 +8,7 @@ public class Penguin extends Animal implements Flying, Marin {
     public Penguin(Animal origin) {
         super(origin);
         this.sound = "screeching";
+        this.power = 2;
     }
     public Penguin() { super("Penguin", SEX.MALE, 30); }
 
