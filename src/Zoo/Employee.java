@@ -9,10 +9,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Employee extends AbstractAnimal{
+    public double salary=0.0;
+
     public Employee(String name, SEX sex, int age){
         this.setName(name);
         this.setSex(sex);
         this.setAge(age);
+    }
+
+    public int getSalary() { return (int) salary; }
+
+    public void setSalary(double salary) { this.salary = salary; }
+
+    public void EarnSalary(Zoo zoo){
+        this.monthsPasses(1);
+        this.setSalary(getSalary() + (zoo.money*0.1));
     }
 
     public void inspect(AbstractEnclosure enclosure){
