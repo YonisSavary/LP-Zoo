@@ -136,7 +136,7 @@ public abstract class AbstractAnimal {
             this.setHunger((byte) (hunger-((int) Math.floor(Math.random()*2*monthsNumber)))  );
         }
     }
-    public void EnclosureAttribution(ENCLOSURE_TYPE type){
+    public void enclosureAttribution(ENCLOSURE_TYPE type){
         this.setEnclosure(type);
     }
 

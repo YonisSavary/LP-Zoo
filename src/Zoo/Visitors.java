@@ -2,7 +2,7 @@ package Zoo;
 
 import Enclosure.Enclosure;
 
-public class Visitors extends Thread{
+public class Visitors {
     private String name;
     public int money = 10;
 
@@ -15,7 +15,6 @@ public class Visitors extends Thread{
     }
     public void seeEnclosure(Enclosure enclosure) throws InterruptedException {
         System.out.println("wow quel bel " + enclosure.getName());
-        Thread.sleep(10000);
 
     }
 }
